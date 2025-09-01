@@ -21,14 +21,15 @@ import java.util.Optional;
 @Tag(name = "Manutenzione", description = "API per la gestione delle manutenzioni")
 public class ManutenzioneController {
 
+  @Autowired
   private final ManutenzioneService manutenzioneService;
 
-  @Autowired
-  public ManutenzioneController(ManutenzioneService manutenzioneService) {
-    this.manutenzioneService = manutenzioneService;
-  }
+    public ManutenzioneController(ManutenzioneService manutenzioneService) {
+        this.manutenzioneService = manutenzioneService;
+    }
 
-  @Operation(summary = "Recupera tutte le manutenzioni")
+
+    @Operation(summary = "Recupera tutte le manutenzioni")
   @GetMapping
   public List<Manutenzione> getAllManutenzioni() {
     return manutenzioneService.findAll();
@@ -46,6 +47,20 @@ public class ManutenzioneController {
     Optional<Manutenzione> manutenzione = manutenzioneService.findById(id);
     return manutenzione.map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+
+  @Operation(summary = "Recupera una manutenzione per Utente")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Manutenzione trovata"),
+          @ApiResponse(responseCode = "404", description = "Manutenzione non trovata")
+  })
+  @GetMapping("/all/{username}")
+  public List<Manutenzione> getManutenzioneByUser(
+          @Parameter(description = "ID della manutenzione da recuperare") @PathVariable String username) {
+
+    List<Manutenzione> manutenzioni = manutenzioneService.findByEseguitoDa(username);
+    return manutenzioni;
   }
 
   @Operation(summary = "Crea una nuova manutenzione")
@@ -76,6 +91,29 @@ public class ManutenzioneController {
     manutenzione.setDataManutenzione(manutenzioneDetails.getDataManutenzione());
     manutenzione.setEseguitoDa(manutenzioneDetails.getEseguitoDa());
     manutenzione.setDispositivo(manutenzioneDetails.getDispositivo());
+
+    Manutenzione updated = manutenzioneService.save(manutenzione);
+    return ResponseEntity.ok(updated);
+  }
+
+
+  @Operation(summary = "Aggiorna una manutenzione esistente")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200", description = "Manutenzione aggiornata"),
+          @ApiResponse(responseCode = "404", description = "Manutenzione non trovata")
+  })
+  @PutMapping("/manutentata/{id}")
+  public ResponseEntity<Manutenzione> updateManutentata(
+          @Parameter(description = "ID della manutenzione da aggiornare") @PathVariable Long id) {
+
+    Optional<Manutenzione> manutenzioneOptional = manutenzioneService.findById(id);
+
+    if (!manutenzioneOptional.isPresent()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    Manutenzione manutenzione = manutenzioneOptional.get();
+    manutenzione.setStato("Manutentata");
 
     Manutenzione updated = manutenzioneService.save(manutenzione);
     return ResponseEntity.ok(updated);

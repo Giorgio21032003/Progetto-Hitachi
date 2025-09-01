@@ -30,6 +30,9 @@ public class ManutenzioneServiceImpl implements ManutenzioneService {
     }
 
     @Override
+    public List<Manutenzione> findByEseguitoDa(String username) { return manutenzioneRepository.findByEseguitoDa(username); }
+
+    @Override
     public Manutenzione save(Manutenzione manutenzione) {
         return manutenzioneRepository.save(manutenzione);
     }

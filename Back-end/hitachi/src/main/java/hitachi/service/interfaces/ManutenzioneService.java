@@ -14,6 +14,8 @@ public interface ManutenzioneService {
 
     Optional<Manutenzione> findById(Long id);
 
+    List<Manutenzione> findByEseguitoDa(String username);
+
     Manutenzione save(Manutenzione manutenzione);
 
     void deleteById(Long id);

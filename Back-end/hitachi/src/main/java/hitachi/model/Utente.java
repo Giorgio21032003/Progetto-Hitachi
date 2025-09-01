@@ -12,7 +12,7 @@ public class Utente {
 
     @Id
     @Column(length = 100, nullable = false, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -31,12 +31,12 @@ public class Utente {
 
     // Getters e Setters
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

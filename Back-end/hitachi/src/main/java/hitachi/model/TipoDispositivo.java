@@ -18,8 +18,6 @@ public class TipoDispositivo {
 
     private String descrizione;
 
-    @OneToMany(mappedBy = "tipoDispositivo")
-    private List<Dispositivo> dispositivi;
 
 
 }

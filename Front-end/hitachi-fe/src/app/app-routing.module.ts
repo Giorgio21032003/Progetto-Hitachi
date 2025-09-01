@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from 'src/pages/home-page/home-page.component';
+import { LoginPageComponent } from 'src/pages/login-page/login-page.component';
 
 
 const routes: Routes = [
-   { path: '', component: HomePageComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent },
+   { path: 'login', component: LoginPageComponent },
 ];
 
 @NgModule({

@@ -26,6 +26,9 @@ public class Manutenzione {
     @Column(name = "eseguito_da")
     private String eseguitoDa;
 
+    @Column(name = "stato")
+    private String stato;
+
     @PrePersist
     protected void onCreate() {
         this.dataManutenzione = LocalDateTime.now();

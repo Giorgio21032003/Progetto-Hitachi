@@ -1,0 +1,62 @@
+.no-overflow {
+    overflow-x: hidden;
+}
+
+/* Spinner overlay globale */
+.spinner-overlay {
+  position: fixed;       /* fissato rispetto alla finestra, non al container */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7); /* trasparenza leggera */
+  z-index: 1050;        /* sopra tutto il contenuto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.custom-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+
+  th.mat-header-cell {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: #444;
+  }
+
+  td.mat-cell, th.mat-header-cell {
+    padding: 12px;
+  }
+
+  tr.mat-row:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+}
+
+/* Stati con colori */
+.stato-attivo {
+  color: #2e7d32; /* verde */
+  font-weight: bold;
+}
+.stato-inattivo {
+  color: #c62828; /* rosso */
+  font-weight: bold;
+}
+.stato-manutenzione {
+  color: #f9a825; /* giallo */
+  font-weight: bold;
+}
+
+/* Motivazione con ellissi e tooltip */
+.text-ellipsis {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}

@@ -1,0 +1,20 @@
+.modal-container {
+  width: 95vw;       /* quasi tutta la larghezza della viewport */
+  max-width: 900px;  /* larghezza massima aumentata */
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 600px) {
+  .modal-container {
+    width: 100vw;    /* tutta la larghezza disponibile */
+    max-width: 100%; /* togli il limite massimo */
+    padding: 0 10px; /* un po’ di padding laterale */
+  }
+
+  .modal-container .row.p-3 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}

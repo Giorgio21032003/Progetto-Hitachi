@@ -27,10 +27,7 @@ public class Dispositivo {
 
     @Column(name = "creato_il")
     private LocalDateTime creatoIl;
-
-    @OneToMany(mappedBy = "dispositivo")
-    private List<Manutenzione> manutenzioni;
-
+    
     @PrePersist
     protected void onCreate() {
         this.creatoIl = LocalDateTime.now();

@@ -1,0 +1,56 @@
+<div class="modal-container p-2">
+  <div class="row p-2">
+    <div class="fw-bold col-6" mat-dialog-title>{{ titolo }}</div>
+    <div class="col-6 d-flex justify-content-end">
+      <button mat-icon-button (click)="onNoClick()" aria-label="Chiudi">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <hr>
+
+  <div class="dialog-content mt-3">
+    <form [formGroup]="formManutenzione">
+
+      <div class="row p-3">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Dispositivo</mat-label>
+            <mat-select (selectionChange)="onDispositivoChange($event)" formControlName="nome" [required]="true">
+              <mat-option *ngFor="let dispositivo of dispositivi" [value]="dispositivo.nome">
+                {{ dispositivo.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Tipologia</mat-label>
+            <input matInput disabled formControlName="tipologia" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row p-3">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Descrizione</mat-label>
+            <textarea matInput disabled formControlName="descrizione" [matTooltip]="this.formManutenzione.get('tipologia').value"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Motivazione della Manutenzione</mat-label>
+            <textarea formControlName="motivazione" matInput [matTooltip]="this.formManutenzione.get('motivazione').value"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <mat-dialog-actions class="p-3" align="end">
+    <button mat-flat-button color="warn" cdkFocusInitial [disabled]="!formManutenzione.valid" (click)="salvaManutenzione()">Salva</button>
+  </mat-dialog-actions>
+</div>
